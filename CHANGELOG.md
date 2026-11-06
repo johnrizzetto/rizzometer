@@ -2,7 +2,7 @@
 
 ## 1.1.0
 
-- Renamed the app and public project to Codex Claude Usage Monitor, preserving existing account storage and preferences.
+- Renamed the app and public project to Rizzometer, preserving existing account storage and preferences.
 
 - Added a dedicated Claude monitor login with automatic OAuth renewal and an app-owned Keychain cache.
 - Retained read-only access to existing shared Claude Code logins without refreshing their tokens.

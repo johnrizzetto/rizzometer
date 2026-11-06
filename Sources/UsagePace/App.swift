@@ -17,7 +17,7 @@ struct Dashboard: View {
         VStack(spacing: 0) {
             HStack {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Codex Claude Usage Monitor").font(.system(size: 15, weight: .semibold, design: .rounded))
+                    Text("Rizzometer").font(.system(size: 15, weight: .semibold, design: .rounded))
                     Text("Your accounts, against the clock").font(.system(size: 11)).foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -30,7 +30,7 @@ struct Dashboard: View {
                     }
                     Divider()
                     Button("Open app data folder") { NSWorkspace.shared.activateFileViewerSelecting([Locations.root]) }
-                    Button("Quit Codex Claude Usage Monitor") { NSApplication.shared.terminate(nil) }.keyboardShortcut("q")
+                    Button("Quit Rizzometer") { NSApplication.shared.terminate(nil) }.keyboardShortcut("q")
                 } label: { Image(systemName: "gearshape") }.menuStyle(.borderlessButton).fixedSize()
             }.padding(20)
             HStack(spacing: 12) {
@@ -227,9 +227,15 @@ struct WindowLane: View {
         store = AccountStore()
         item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         item.button?.imagePosition = .imageLeading
+        if let url = Bundle.main.url(forResource: "MenuIcon", withExtension: "png"),
+           let icon = NSImage(contentsOf: url) {
+            icon.size = NSSize(width: 22, height: 22)
+            icon.isTemplate = true
+            item.button?.image = icon
+        }
         item.button?.target = self
         item.button?.action = #selector(toggle)
-        item.button?.toolTip = "Codex Claude Usage Monitor: two Codex accounts and Claude"
+        item.button?.toolTip = "Rizzometer: two Codex accounts and Claude"
         popover.behavior = .transient
         popover.contentSize = NSSize(width: 440, height: 690)
         popover.contentViewController = NSHostingController(rootView: Dashboard(store: store))
@@ -260,7 +266,9 @@ struct WindowLane: View {
             .font: NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .semibold)
         ]))
         item.button?.attributedTitle = title
-        item.button?.image = MenuBarMeter.image(used: window?.used, expected: pace?.expected, signal: signal)
+        if item.button?.image == nil {
+            item.button?.image = MenuBarMeter.image(used: window?.used, expected: pace?.expected, signal: signal)
+        }
         let identity = "\(account.label) · \(store.menuWindow.label)"
         if let window, let pace {
             item.button?.toolTip = identity + String(format: ": %+.1f percentage points against perfect pacing (%.0f%% used, %.1f%% expected). Resets in %@.", pace.delta, window.used, pace.expected, durationText(pace.remaining))
@@ -269,7 +277,7 @@ struct WindowLane: View {
         } else {
             item.button?.toolTip = identity + (window == nil ? ": this window is unavailable for this account." : ": refresh needed for current pacing.")
         }
-        item.button?.setAccessibilityLabel(item.button?.toolTip ?? "Codex Claude Usage Monitor")
+        item.button?.setAccessibilityLabel(item.button?.toolTip ?? "Rizzometer")
     }
     @objc func toggle() {
         if popover.isShown { popover.performClose(nil) }

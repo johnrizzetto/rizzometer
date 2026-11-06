@@ -1,16 +1,18 @@
-# Codex Claude Usage Monitor
+# Rizzometer
 
-[![Build](https://github.com/johnrizzetto/codex-claude-usage-monitor/actions/workflows/ci.yml/badge.svg)](https://github.com/johnrizzetto/codex-claude-usage-monitor/actions/workflows/ci.yml)
+<img src="docs/assets/icon.svg" width="96" height="96" alt="Rizzometer gauge logo">
+
+[![Build](https://github.com/johnrizzetto/rizzometer/actions/workflows/ci.yml/badge.svg)](https://github.com/johnrizzetto/rizzometer/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-187653)](LICENSE)
 [![macOS 14+](https://img.shields.io/badge/macOS-14%2B-202620)](#requirements)
 
 **See how far ahead or behind you are against your AI usage limits.**
 
-Codex Claude Usage Monitor is a small native Mac menu bar app for Codex and Claude subscriptions. Pick an account and a 5-hour or weekly window. The menu bar shows a quota bar and a signed difference from perfect pacing, colored green, yellow or red.
+Rizzometer is a small native Mac menu bar app for Codex and Claude subscriptions. Pick an account and a 5-hour or weekly window. The menu bar shows a quota bar and a signed difference from perfect pacing, colored green, yellow or red.
 
-[Website and interactive demo](https://johnrizzetto.github.io/codex-claude-usage-monitor/) · [Download](https://github.com/johnrizzetto/codex-claude-usage-monitor/releases/latest) · [Report a bug](https://github.com/johnrizzetto/codex-claude-usage-monitor/issues/new/choose)
+[Website and interactive demo](https://johnrizzetto.github.io/rizzometer/) · [Download](https://github.com/johnrizzetto/rizzometer/releases/latest) · [Report a bug](https://github.com/johnrizzetto/rizzometer/issues/new/choose)
 
-![Codex Claude Usage Monitor example with illustrative account data](docs/assets/preview.svg)
+![Rizzometer example with illustrative account data](docs/assets/preview.svg)
 
 ## What it does
 
@@ -36,7 +38,7 @@ The app discovers CLIs in standard Homebrew and local install locations. Provide
 
 ### Download an app
 
-Choose the build matching your Mac from [Releases](https://github.com/johnrizzetto/codex-claude-usage-monitor/releases/latest), unzip it and move **Codex Claude Usage Monitor.app** to Applications. Release checksums are included alongside the downloads.
+Choose the build matching your Mac from [Releases](https://github.com/johnrizzetto/rizzometer/releases/latest), unzip it and move **Rizzometer.app** to Applications. Release checksums are included alongside the downloads.
 
 These builds are ad-hoc signed, not Apple Developer ID signed or notarized. macOS may decline to open a downloaded app. Building from source is an alternative. Only run a build whose source and origin you trust.
 
@@ -45,19 +47,19 @@ These builds are ad-hoc signed, not Apple Developer ID signed or notarized. macO
 Install Xcode Command Line Tools if they are not already installed, then run:
 
 ```sh
-git clone https://github.com/johnrizzetto/codex-claude-usage-monitor.git
-cd codex-claude-usage-monitor
+git clone https://github.com/johnrizzetto/rizzometer.git
+cd rizzometer
 ./test.sh
 ./build.sh
-open "dist/Codex Claude Usage Monitor.app"
+open "dist/Rizzometer.app"
 ```
 
 To install your build in your user Applications folder:
 
 ```sh
 mkdir -p "$HOME/Applications"
-ditto "dist/Codex Claude Usage Monitor.app" "$HOME/Applications/Codex Claude Usage Monitor.app"
-open "$HOME/Applications/Codex Claude Usage Monitor.app"
+ditto "dist/Rizzometer.app" "$HOME/Applications/Rizzometer.app"
+open "$HOME/Applications/Rizzometer.app"
 ```
 
 ## Connect your accounts
@@ -147,6 +149,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and the [arch
 
 Provider behavior was researched against the MIT-licensed [CodexBar](https://github.com/steipete/CodexBar) documentation and public source. No CodexBar source code is bundled.
 
-Codex Claude Usage Monitor is independent of OpenAI and Anthropic. Codex, ChatGPT and Claude belong to their respective owners.
+Rizzometer is independent of OpenAI and Anthropic. Codex, ChatGPT and Claude belong to their respective owners.
 
 [MIT License](LICENSE), copyright John Rizzetto.
