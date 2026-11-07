@@ -117,6 +117,7 @@ struct AccountCard: View {
                     if account.connected { Button("Disconnect from monitor") { store.disconnect(account.id) } }
                 } label: { Image(systemName: "ellipsis") }.menuStyle(.borderlessButton).fixedSize()
             }
+            AccountLogoPicker(id: account.id, isClaude: account.isClaude) { store.onChange?() }
             if account.signingIn {
                 HStack {
                     ProgressView().controlSize(.small)
@@ -255,20 +256,16 @@ struct WindowLane: View {
         let stale = account.stale(at: now)
         let signal = PaceSignal.evaluate(window, at: now, stale: stale)
         let pace = signal == .unavailable ? nil : window?.pacing(at: now)
-        let percentage = pace.map { String(format: " %+.0f%%", abs($0.delta) < 0.5 ? 0 : $0.delta) } ?? " ?%"
-        let accountBadge = account.menuBadge
-        let title = NSMutableAttributedString(string: " \(accountBadge)", attributes: [
-            .foregroundColor: NSColor.labelColor,
-            .font: NSFont.monospacedSystemFont(ofSize: 10, weight: .semibold)
+        let limit = store.menuWindow == .weekly ? "W" : "5h"
+        let percentage = window.flatMap { reading in
+            !stale && (0...100).contains(reading.used) ? String(format: "%.0f%%", 100 - reading.used) : nil
+        } ?? "–"
+        item.button?.attributedTitle = NSAttributedString(string: "\(limit) \(percentage)", attributes: [
+            .font: NSFont.monospacedDigitSystemFont(ofSize: 11, weight: .medium)
         ])
-        title.append(NSAttributedString(string: percentage, attributes: [
-            .foregroundColor: MenuBarMeter.color(for: signal),
-            .font: NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .semibold)
-        ]))
-        item.button?.attributedTitle = title
-        if item.button?.image == nil {
-            item.button?.image = MenuBarMeter.image(used: window?.used, expected: pace?.expected, signal: signal)
-        }
+        item.button?.image = AccountLogo.readout(id: account.id, isClaude: account.isClaude,
+                                                 used: stale ? nil : window?.used,
+                                                 expected: pace?.expected, signal: signal)
         let identity = "\(account.label) · \(store.menuWindow.label)"
         if let window, let pace {
             item.button?.toolTip = identity + String(format: ": %+.1f percentage points against perfect pacing (%.0f%% used, %.1f%% expected). Resets in %@.", pace.delta, window.used, pace.expected, durationText(pace.remaining))

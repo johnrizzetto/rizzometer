@@ -34,6 +34,12 @@ Rizzometer is a small native Mac menu bar app for Codex and Claude subscriptions
 
 The app discovers CLIs in standard Homebrew and local install locations. Provider integrations may change. A missing window is shown as unavailable, never guessed or replaced with another account's quota.
 
+## Account logos
+
+Choose **Choose Logo…** for an account to use a JPG or PNG. Rizzometer saves a small local copy, so you can move the original file. **Reset Logo** restores the built-in house for Codex or briefcase for Claude.
+
+The menu bar meter fills as you use quota. The vertical line marks the pacing target and the color shows your pacing status. The percentage defaults to quota left.
+
 ## Installation
 
 ### Download an app
