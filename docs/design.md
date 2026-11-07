@@ -1,4 +1,4 @@
-# Codex Claude Usage Monitor
+# Rizzometer
 
 Native macOS 14+ menu bar app, two independent Codex OAuth profiles and one Claude subscription account. Swift, AppKit, SwiftUI and Foundation only. No web server or third-party runtime.
 

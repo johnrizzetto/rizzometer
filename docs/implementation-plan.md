@@ -1,4 +1,4 @@
-# Codex Claude Usage Monitor Implementation Plan
+# Rizzometer Implementation Plan
 
 Goal: show three subscription accounts and pacing in one native Mac popover.
 
